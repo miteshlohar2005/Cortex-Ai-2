@@ -9,6 +9,7 @@ import { proxyWithUser } from "./utils/proxyWithHeaders.js";
 import { protect } from "./middlewares/auth.middleware.js";
 import { getCurrentUser } from "./controllers/user.controller.js";
 import cookieParser from "cookie-parser"
+import billingRouter from "./routes/billing.routes.js";
 dotenv.config();
 const app = express();
 const port=process.env.PORT || 5000
@@ -28,8 +29,7 @@ app.use("/api/auth",proxy(process.env.AUTH_SERVICE))
 app.use("/api/me",protect,getCurrentUser)
 app.use("/api/chat",protect,proxyWithUser(process.env.CHAT_SERVICE))
 app.use("/api/agent",protect,proxyWithUser(process.env.AGENT_SERVICE))
-app.use("/api/billing",protect,proxyWithUser(process.env.BILLING_SERVICE))
-
+app.use("/api/billing", protect, billingRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({
