@@ -10,6 +10,8 @@ import { protect } from "./middlewares/auth.middleware.js";
 import { getCurrentUser } from "./controllers/user.controller.js";
 import cookieParser from "cookie-parser"
 import billingRouter from "./routes/billing.routes.js";
+import connectDB from "./config/db.js";
+
 dotenv.config();
 const app = express();
 const port=process.env.PORT || 5000
@@ -39,8 +41,10 @@ app.get("/", (req, res) => {
 });
 
 
-app.listen(port, () => {
-  console.log(
-    `Gateway running on ${port}`
-  );
+app.listen(port, async () => {
+
+    await connectDB();
+
+    console.log(`Gateway running on ${port}`);
+
 });
