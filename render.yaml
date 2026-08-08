@@ -1,0 +1,155 @@
+services:
+  # ─────────────────────────────────────────────────────────────
+  # API GATEWAY — Public-facing service (internet accessible)
+  # ─────────────────────────────────────────────────────────────
+  - type: web
+    name: cortex-gateway
+    runtime: docker
+    dockerfilePath: ./backend/gateway/Dockerfile
+    dockerContext: ./backend
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: FRONTEND_URL
+        sync: false          # Set to your Vercel URL in Render dashboard
+      - key: REDIS_URL
+        sync: false          # Set to your Upstash Redis URL
+      - key: AUTH_SERVICE
+        fromService:
+          name: cortex-auth
+          type: pserv
+          property: hostport
+      - key: CHAT_SERVICE
+        fromService:
+          name: cortex-chat
+          type: pserv
+          property: hostport
+      - key: AGENT_SERVICE
+        fromService:
+          name: cortex-agent
+          type: pserv
+          property: hostport
+      - key: MONGODB_URL
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+
+  # ─────────────────────────────────────────────────────────────
+  # AUTH SERVICE — Private (only reachable by other Render services)
+  # ─────────────────────────────────────────────────────────────
+  - type: pserv
+    name: cortex-auth
+    runtime: docker
+    dockerfilePath: ./backend/services/auth/Dockerfile
+    dockerContext: ./backend
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8001
+      - key: MONGODB_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false          # Your Vercel URL (for any auth redirects)
+      - key: REDIS_URL
+        sync: false          # Set to your Upstash Redis URL
+      - key: FIREBASE_SERVICE_ACCOUNT
+        sync: false          # JSON string of your Firebase Admin service account
+
+  # ─────────────────────────────────────────────────────────────
+  # CHAT SERVICE — Private
+  # ─────────────────────────────────────────────────────────────
+  - type: pserv
+    name: cortex-chat
+    runtime: docker
+    dockerfilePath: ./backend/services/chat/Dockerfile
+    dockerContext: ./backend
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8002
+      - key: MONGODB_URL
+        sync: false
+
+  # ─────────────────────────────────────────────────────────────
+  # AGENT SERVICE — Private
+  # ─────────────────────────────────────────────────────────────
+  - type: pserv
+    name: cortex-agent
+    runtime: docker
+    dockerfilePath: ./backend/services/agent/Dockerfile
+    dockerContext: ./backend
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8003
+      - key: MONGODB_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false          # Set to your Upstash Redis URL
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_REGION
+        sync: false
+      - key: AWS_BUCKET_NAME
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: CHAT_SERVICE
+        fromService:
+          name: cortex-chat
+          type: pserv
+          property: hostport
+      - key: AUTH_SERVICE
+        fromService:
+          name: cortex-auth
+          type: pserv
+          property: hostport
+      - key: GATEWAY_URL
+        fromService:
+          name: cortex-gateway
+          type: web
+          property: host
+
+  # ─────────────────────────────────────────────────────────────
+  # BILLING SERVICE — Private
+  # ─────────────────────────────────────────────────────────────
+  - type: pserv
+    name: cortex-billing
+    runtime: docker
+    dockerfilePath: ./backend/services/billing/Dockerfile
+    dockerContext: ./backend
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8004
+      - key: MONGODB_URL
+        sync: false
+      - key: AUTH_SERVICE
+        fromService:
+          name: cortex-auth
+          type: pserv
+          property: hostport
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
