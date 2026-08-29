@@ -94,6 +94,15 @@ await axios.post(
 
  }catch(error){
 
+    console.error("========== AGENT ERROR ==========");
+  console.error("MESSAGE:", error.message);
+  console.error("CODE:", error.code);
+  console.error("STATUS:", error.response?.status);
+  console.error("DATA:", error.response?.data);
+  console.error("URL:", error.config?.url);
+  console.error("================================");
+
+
   next(error)
 
  }
