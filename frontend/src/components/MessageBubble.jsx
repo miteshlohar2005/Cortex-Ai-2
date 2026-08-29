@@ -3,8 +3,49 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { FiExternalLink, FiX } from "react-icons/fi";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Copy, Check } from "lucide-react";
+
+/* Restrained monochrome syntax theme (no colorful highlighting) */
+const monoPrism = {
+  'code[class*="language-"]': {
+    color: "#E5E5E5",
+    fontFamily: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace",
+    fontSize: "13px",
+    textShadow: "none",
+  },
+  'pre[class*="language-"]': {
+    color: "#E5E5E5",
+    background: "transparent",
+    textShadow: "none",
+  },
+  comment: { color: "#737373", fontStyle: "italic" },
+  prolog: { color: "#737373" },
+  cdata: { color: "#737373" },
+  doctype: { color: "#737373" },
+  punctuation: { color: "#A3A3A3" },
+  property: { color: "#FFFFFF" },
+  tag: { color: "#D4D4D4" },
+  boolean: { color: "#FFFFFF" },
+  number: { color: "#D4D4D4" },
+  constant: { color: "#FFFFFF" },
+  symbol: { color: "#A3A3A3" },
+  selector: { color: "#A3A3A3" },
+  "attr-name": { color: "#D4D4D4" },
+  string: { color: "#E5E5E5" },
+  char: { color: "#E5E5E5" },
+  builtin: { color: "#FFFFFF" },
+  inserted: { color: "#FFFFFF" },
+  function: { color: "#FFFFFF", fontWeight: 500 },
+  "class-name": { color: "#FFFFFF", fontWeight: 500 },
+  keyword: { color: "#FFFFFF", fontWeight: 500 },
+  operator: { color: "#A3A3A3" },
+  entity: { color: "#E5E5E5" },
+  url: { color: "#E5E5E5" },
+  "attr-value": { color: "#E5E5E5" },
+  regex: { color: "#E5E5E5" },
+  atrule: { color: "#FFFFFF" },
+  important: { color: "#FFFFFF", fontWeight: 500 },
+};
 
 function MessageBubble({ role, content ,images}) {
   const isUser = role === "user";
@@ -33,8 +74,8 @@ const markdown = (content || "")
   leading-relaxed
         ${
           isUser
-            ? "bg-gradient-to-br from-indigo-500 to-violet-700 text-white rounded-tr-sm"
-            : " text-slate-200 rounded-tl-sm"
+            ? "bg-[#1F1F1F] border border-[#262626] text-white rounded-tr-sm"
+            : " text-neutral-200 rounded-tl-sm"
         }`}
       >
         {images.length > 0 && (
@@ -54,15 +95,15 @@ const markdown = (content || "")
   remarkPlugins={[remarkGfm]}
   components={{
     h1: ({ children }) => (
-      <h1 className="text-2xl font-bold mt-5 mb-3">{children}</h1>
+      <h1 className="text-2xl font-bold mt-5 mb-3 text-white">{children}</h1>
     ),
 
     h2: ({ children }) => (
-      <h2 className="text-xl font-semibold mt-4 mb-2">{children}</h2>
+      <h2 className="text-xl font-semibold mt-4 mb-2 text-white">{children}</h2>
     ),
 
     h3: ({ children }) => (
-      <h3 className="text-lg font-semibold mt-3 mb-2">{children}</h3>
+      <h3 className="text-lg font-semibold mt-3 mb-2 text-white">{children}</h3>
     ),
 
     p: ({ children }) => (
@@ -108,7 +149,7 @@ const markdown = (content || "")
         href={href}
         target="_blank"
         rel="noreferrer"
-        className="text-indigo-400 underline inline-flex items-center gap-1"
+        className="text-white underline hover:text-neutral-200 inline-flex items-center gap-1"
       >
         {children}
         <FiExternalLink size={11} />
@@ -138,7 +179,7 @@ const markdown = (content || "")
 
       if (!className) {
         return (
-          <code className="px-1.5 py-0.5 rounded bg-white/10 text-pink-400">
+          <code className="px-1.5 py-0.5 rounded bg-white/10 text-white">
             {value}
           </code>
         );
@@ -147,17 +188,17 @@ const markdown = (content || "")
       const language = className.replace("language-", "");
 
       return (
-        <div className="my-4 overflow-hidden rounded-xl border border-white/10 bg-[#111318]">
+        <div className="my-4 overflow-hidden rounded-xl border border-[#262626] bg-[#111111]">
 
-          <div className="flex items-center justify-between bg-[#1b1d24] border-b border-white/10 px-4 py-2">
+          <div className="flex items-center justify-between bg-[#171717] border-b border-white/10 px-4 py-2">
 
-            <span className="uppercase text-xs text-slate-400">
+            <span className="uppercase text-xs text-neutral-500">
               {language}
             </span>
 
             <button
               onClick={() => copyCode(value)}
-              className="flex items-center gap-1 text-xs"
+              className="flex items-center gap-1 text-xs text-neutral-500 hover:text-white transition-colors duration-150 cursor-pointer"
             >
               {copiedCode === value ? (
                 <>
@@ -176,13 +217,13 @@ const markdown = (content || "")
 
           <SyntaxHighlighter
             language={language}
-            style={oneDark}
+            style={monoPrism}
             wrapLongLines
             showLineNumbers
             customStyle={{
               margin: 0,
               padding: "16px",
-              background: "#0d1117",
+              background: "#111111",
               fontSize: "13px",
             }}
           >

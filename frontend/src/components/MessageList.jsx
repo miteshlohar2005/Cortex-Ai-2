@@ -11,7 +11,7 @@ function NeuralPulse() {
       {[0, 0.45, 0.9].map((delay, i) => (
         <motion.span
           key={i}
-          className="absolute inset-0 rounded-full border border-cyan-400/30"
+          className="absolute inset-0 rounded-full border border-white/25"
           initial={{ scale: 0.3, opacity: 0.55 }}
           animate={{ scale: 1.7, opacity: 0 }}
           transition={{
@@ -23,8 +23,8 @@ function NeuralPulse() {
         />
       ))}
       <motion.span
-        className="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-cyan-300 to-violet-400"
-        style={{ boxShadow: "0 0 14px rgba(125,211,252,0.55)" }}
+        className="w-2.5 h-2.5 rounded-full bg-white"
+        style={{ boxShadow: "0 0 14px rgba(255,255,255,0.45)" }}
         animate={{ scale: [1, 1.25, 1] }}
         transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -62,7 +62,7 @@ function GeneratingIndicator() {
             {label.split("").map((ch, i) => (
               <motion.span
                 key={i}
-                className="text-[13px] font-medium tracking-wide text-slate-400"
+                className="text-[13px] font-medium tracking-wide text-neutral-500"
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{
                   duration: 1.4,
@@ -130,19 +130,19 @@ if (latestArtifactMessage) {
   }, [selectedConversation?._id]);
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="flex-1 overflow-y-auto px-6 py-8 space-y-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {messages.length === 0 && !isLoading ? (
         <div className="h-full flex flex-col items-center justify-center gap-4 text-center">
           <div className="flex flex-col gap-1.5">
-            <h1 className="text-[20px] font-semibold text-slate-200 tracking-tight">CortexAI</h1>
-            <h3 className="text-[15px] font-semibold text-slate-400 tracking-tight">How can I help you?</h3>
-            <p className="text-[13px] text-slate-600 max-w-[260px] leading-relaxed">Ask me anything — code, ideas, explanations, or just a quick question.</p>
+            <h1 className="text-[22px] font-semibold text-white tracking-tight">CortexAI</h1>
+            <h3 className="text-[15px] font-medium text-neutral-500 tracking-tight">How can I help you?</h3>
+            <p className="text-[13px] text-neutral-500 max-w-[260px] leading-relaxed">Ask me anything — code, ideas, explanations, or just a quick question.</p>
           </div>
           <div className="flex flex-wrap justify-center gap-2 mt-1">
             {["Write a Netflix clone", "Explain Redis", "Build a dashboard"].map((s) => (
               <button
                 key={s}
-                className="text-[12px] text-slate-400 bg-white/[0.04] border border-white/[0.07] px-3.5 py-1.5 rounded-lg hover:bg-white/[0.08] hover:text-slate-200 transition-colors duration-150 cursor-pointer"
+                className="text-[12px] text-neutral-500 bg-white/[0.04] border border-[#262626] px-3.5 py-1.5 rounded-lg hover:bg-white/[0.08] hover:text-white transition-colors duration-150 cursor-pointer"
               >
                 {s}
               </button>
@@ -151,6 +151,7 @@ if (latestArtifactMessage) {
         </div>
       ) : (
         <>
+          <div className="max-w-3xl mx-auto flex flex-col gap-6">
           {messages.map((msg, i) => (
             <motion.div
               key={i}
@@ -171,7 +172,7 @@ if (latestArtifactMessage) {
               <GeneratingIndicator />
             </motion.div>
           )}
-        
+          </div>
         </>
       )}
         <div ref={bottomRef} />

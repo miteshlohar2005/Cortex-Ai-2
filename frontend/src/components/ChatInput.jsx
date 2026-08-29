@@ -265,8 +265,8 @@ catch(error){
   };
 
   return (
-   <div className="w-full overflow-hidden px-3 md:px-5 py-4 border-t border-white/[0.06] bg-[#0d0f14]">
-      <div className="flex flex-col gap-2 bg-white/[0.03] border border-white/[0.07] rounded-2xl px-4 pt-3.5 pb-3">
+   <div className="w-full overflow-hidden px-3 md:px-5 py-4 border-t border-[#262626] bg-[#0A0A0A]">
+      <div className="flex flex-col gap-2 bg-[#111111] border border-[#404040] rounded-2xl px-4 pt-3.5 pb-3 transition-colors duration-200 focus-within:border-white">
 
 
     <div className="flex w-[80%] gap-2 pr-2 flex-wrap">
@@ -297,8 +297,8 @@ catch(error){
 
             ${
               isActive
-                ? "bg-gradient-to-r from-indigo-500 to-violet-600 text-white border-transparent shadow-[0_1px_8px_rgba(99,102,241,.35)]"
-                : "bg-white/[0.03] text-slate-400 border-white/[0.06] hover:bg-white/[0.07]"
+                ? "bg-white text-black border-white"
+                : "bg-[#111111] text-neutral-200 border-[#404040] hover:bg-[#1F1F1F] hover:text-white"
             }
           `}
         >
@@ -307,8 +307,8 @@ catch(error){
             size={14}
             className={
               isActive
-                ? "text-white"
-                : "text-slate-500"
+                ? "text-black"
+                : "text-neutral-500"
             }
           />
 
@@ -341,7 +341,7 @@ selectedFile.type==="application/pdf"
 
 size={16}
 
-className="text-red-400"
+className="text-neutral-200"
 
 />
 
@@ -377,7 +377,7 @@ selectedFile.name
 
 </p>
 
-<p className="text-[10px] text-slate-500">
+<p className="text-[10px] text-neutral-500">
 
 {
 
@@ -415,7 +415,7 @@ className="ml-2"
 
 size={14}
 
-className="text-slate-500 hover:text-white"
+className="text-neutral-500 hover:text-white"
 
 />
 
@@ -438,7 +438,7 @@ placeholders[selectedAgent]
 }
           rows={3}
           disabled={isLoading}
-          className="w-full bg-transparent outline-none resize-none text-[14px] text-slate-200 placeholder:text-slate-600 leading-relaxed [scrollbar-width:none] [&::-webkit-scrollbar]:hidden disabled:opacity-50"
+          className="w-full bg-transparent outline-none resize-none text-[14px] text-white placeholder:text-neutral-500 leading-relaxed [scrollbar-width:none] [&::-webkit-scrollbar]:hidden disabled:opacity-50"
         />
 
         {/* Bottom row */}
@@ -470,7 +470,7 @@ setSelectedFile(file);
 }}
 
 />
-            <button className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-600 hover:text-slate-400 hover:bg-white/[0.05] border border-transparent hover:border-white/[0.06] transition-all duration-150 bg-transparent cursor-pointer"
+            <button className="flex items-center justify-center w-8 h-8 rounded-lg text-neutral-500 hover:text-white hover:bg-white/[0.05] border border-transparent hover:border-white/[0.06] transition-all duration-150 bg-transparent cursor-pointer"
             onClick={()=>
 fileRef.current.click()
 }
@@ -505,11 +505,11 @@ isListening
 
 ?
 
-"bg-red-500 text-white"
+"bg-white text-black"
 
 :
 
-"text-slate-600 hover:bg-white/[0.05]"
+"text-neutral-500 hover:bg-white/[0.05]"
 
 }
 
@@ -540,10 +540,10 @@ isListening
             disabled={!isLoading && !value.trim()}
             className={`flex items-center justify-center w-8 h-8 rounded-lg border-none cursor-pointer transition-all duration-150
               ${isLoading
-                ? "bg-white text-[#0d0f14] hover:bg-slate-200"
+                ? "bg-white text-[#0A0A0A] hover:bg-neutral-200"
                 : value.trim()
-                ? "bg-gradient-to-br from-indigo-500 to-violet-700 hover:opacity-90 text-white"
-                : "bg-white/[0.05] text-slate-600 cursor-not-allowed"
+                ? "bg-white text-[#0A0A0A] hover:bg-neutral-200"
+                : "bg-white/[0.05] text-neutral-500 cursor-not-allowed"
               }`}
           >
             {isLoading ? <Square size={12} fill="currentColor" /> : <Send size={14} />}
@@ -552,7 +552,7 @@ isListening
         </div>
       </div>
 
-      <p className="text-center text-[10.5px] text-slate-700 mt-2.5">
+      <p className="text-center text-[10.5px] text-neutral-700 mt-2.5">
         CortexAI can make mistakes. Verify important info.
       </p>
     </div>
