@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 });
 
 
-app.listen(port, async () => {
+app.listen(port, "0.0.0.0", async () => {
 
     await connectDB();
 

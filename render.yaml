@@ -48,8 +48,8 @@ services:
     dockerContext: ./backend
     healthCheckPath: /
     envVars:
-      - key: PORT
-        value: 8000
+      # PORT is injected by Render for web services; the gateway binds to it
+      # dynamically (process.env.PORT || 8000). Do not hardcode it here.
       # Frontend origin allowed by CORS, e.g. https://cortex-frontend.onrender.com
       - key: FRONTEND_URL
         sync: false
