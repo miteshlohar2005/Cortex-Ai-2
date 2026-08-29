@@ -20,7 +20,8 @@
 services:
 
   # ---------------- FRONTEND (Static Site, free tier) ----------------
-  - type: static
+  - type: web
+    runtime: static
     name: cortex-frontend
     rootDir: frontend
     buildCommand: npm ci && npm run build
