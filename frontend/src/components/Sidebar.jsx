@@ -113,7 +113,7 @@ const [showBilling, setShowBilling] =useState(false);
     <div className="flex flex-col h-full">
 
       {/* Header */}
-      <div className="flex items-center gap-2.5 px-4 py-4 border-b border-[#262626]">
+      <div className="flex items-center gap-2.5 px-4 py-4 border-b border-[#262626] shrink-0">
         {/* Desktop collapse */}
         <button
           onClick={() => setCollapsed(true)}
@@ -145,7 +145,7 @@ const [showBilling, setShowBilling] =useState(false);
       </div>
 
       {/* New Chat */}
-      <div className="px-4 pt-4 pb-1">
+      <div className="px-4 pt-4 pb-1 shrink-0">
         <button
           onClick={handleCreateConversation}
           className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-black bg-white hover:bg-neutral-200 rounded-[10px] py-[10px] border border-white cursor-pointer transition-colors duration-150"
@@ -158,14 +158,14 @@ const [showBilling, setShowBilling] =useState(false);
       {
         conversations.length==0? (
         
-            <div className="px-5 pt-4 pb-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-neutral-500">
+            <div className="px-5 pt-4 pb-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-neutral-500 shrink-0">
                  No recent conversations
             </div>
           )
         :
         (
              
- <p className="px-5 pt-4 pb-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-neutral-500">
+ <p className="px-5 pt-4 pb-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-neutral-500 shrink-0">
         Recents
       </p>
 
@@ -175,7 +175,7 @@ const [showBilling, setShowBilling] =useState(false);
       {/* Section label */}
      
       {/* Chat list */}
-      <div className="flex-1 overflow-y-auto px-2.5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex-1 overflow-y-auto px-2.5 pb-2 min-h-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {conversations.map((chat) => {
           const isActive = selectedConversation?._id === chat._id;
           const isHov    = hovered === chat._id;
@@ -203,10 +203,10 @@ const [showBilling, setShowBilling] =useState(false);
       </div>
 
       {/* Divider */}
-      <div className="mx-2.5 h-px bg-[#262626]" />
+      <div className="mx-2.5 h-px bg-[#262626] shrink-0" />
 
       {/* Footer */}
-      <div className="px-3.5 py-3.5">
+      <div className="shrink-0 px-3.5 pt-3.5 pb-[calc(0.875rem+env(safe-area-inset-bottom))]">
         {userData ? (
           <div className="flex items-center gap-2.5 cursor-pointer rounded-xl px-3 py-2.5 hover:bg-white/[0.05] transition-colors duration-150">
             <div className="relative shrink-0">
@@ -277,7 +277,7 @@ const [showBilling, setShowBilling] =useState(false);
       {/* ── Sidebar panel ── */}
       <div className={`
         fixed lg:static inset-y-0 left-0 z-50
-        w-[min(320px,85vw)] max-w-[320px] h-screen shrink-0
+        w-[min(320px,85vw)] max-w-[320px] h-screen max-lg:h-[100dvh] shrink-0
         bg-[#0A0A0A] border-r border-[#262626]
         transition-transform duration-250
         ${mobileOpen
