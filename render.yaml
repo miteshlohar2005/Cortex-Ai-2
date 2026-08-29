@@ -25,7 +25,7 @@ services:
     name: cortex-frontend
     rootDir: frontend
     buildCommand: npm ci && npm run build
-    publishPath: dist
+    staticPublishPath: dist
     envVars:
       # Firebase client config (public by design, but stored as a secret
       # in the dashboard so it is never written to the repository)
