@@ -169,26 +169,32 @@ Create `.env` files in the respective directories. **Do NOT commit these files.*
 ### Frontend (`frontend/.env`)
 | Variable | Description |
 | :--- | :--- |
-| `VITE_FIREBASE_API_KEY` | Firebase API Key for the client |
+| `VITE_FIREBASE_API_KEY` | Firebase Web API Key (public client key) |
+| `VITE_SERVER_URL` | API Gateway base URL (e.g. `http://localhost:8000`, `https://cortex-gateway.onrender.com`) |
+| `VITE_RAZORPAY_KEY` | Razorpay Key ID used by the client checkout (public key) |
 
 ### API Gateway (`backend/gateway/.env`)
 | Variable | Description |
 | :--- | :--- |
-| `PORT` | Gateway port (e.g., `8000`) |
+| `PORT` | Gateway port (defaults to `8000`) |
+| `FRONTEND_URL` | Frontend origin allowed for CORS |
 | `REDIS_URL` | Redis connection URL |
+| `MONGODB_URL` | MongoDB connection string (billing data lives here) |
 | `AUTH_SERVICE` | URL of Auth service (e.g., `http://localhost:8001`) |
 | `CHAT_SERVICE` | URL of Chat service |
 | `AGENT_SERVICE` | URL of Agent service |
-| `BILLING_SERVICE` | URL of Billing service |
+| `RAZORPAY_KEY_ID` | Razorpay API Key (billing is handled by the gateway) |
+| `RAZORPAY_KEY_SECRET` | Razorpay API Secret |
 
 ### Agent Service (`backend/services/agent/.env`)
 | Variable | Description |
 | :--- | :--- |
-| `PORT` | Agent service port (e.g., `8003`) |
+| `PORT` | Agent service port (defaults to `8003`) |
 | `MONGODB_URL` | MongoDB connection string |
-| `GATEWAY_URL` | API Gateway URL |
+| `REDIS_URL` | Redis connection URL (rate limiting + memory) |
 | `CHAT_SERVICE` | URL of Chat service |
 | `AUTH_SERVICE` | URL of Auth service |
+| `GATEWAY_URL` | API Gateway URL (optional) |
 | `GOOGLE_API_KEY` | Gemini API Key |
 | `GROQ_API_KEY` | Groq API Key |
 | `OPENROUTER_API_KEY` | OpenRouter API Key |
@@ -203,24 +209,25 @@ Create `.env` files in the respective directories. **Do NOT commit these files.*
 ### Auth Service (`backend/services/auth/.env`)
 | Variable | Description |
 | :--- | :--- |
-| `PORT` | Auth service port (e.g., `8001`) |
+| `PORT` | Auth service port (defaults to `8001`) |
 | `MONGODB_URL` | MongoDB connection string |
 | `FRONTEND_URL` | Client URL (e.g., `http://localhost:5173`) |
-
-### Billing Service (`backend/services/billing/.env`)
-| Variable | Description |
-| :--- | :--- |
-| `PORT` | Billing service port (e.g., `8004`) |
-| `MONGODB_URL` | MongoDB connection string |
-| `AUTH_SERVICE` | URL of Auth service |
-| `RAZORPAY_KEY_ID` | Razorpay Key ID |
-| `RAZORPAY_KEY_SECRET` | Razorpay Secret |
+| `REDIS_URL` | Redis connection URL (session store) |
+| `FIREBASE_SERVICE_ACCOUNT` | Firebase Admin service account as a JSON string (falls back to `serviceAccount.json`) |
 
 ### Chat Service (`backend/services/chat/.env`)
 | Variable | Description |
 | :--- | :--- |
-| `PORT` | Chat service port (e.g., `8002`) |
+| `PORT` | Chat service port (defaults to `8002`) |
 | `MONGODB_URL` | MongoDB connection string |
+
+All services support an optional `CUSTOM_DNS_SERVERS` (comma-separated) to override
+the resolvers used to reach MongoDB/Redis when running in environments with
+restricted DNS (e.g. some dev boxes). Never set it in normal cloud deployments.
+
+> **Note:** The standalone Billing service (`backend/services/billing`) is no longer
+> required — billing logic was merged into the API Gateway, which reads
+> `RAZORPAY_KEY_ID` / `RAZORPAY_KEY_SECRET` directly.
 
 ---
 

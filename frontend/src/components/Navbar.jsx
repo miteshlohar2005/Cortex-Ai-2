@@ -1,8 +1,8 @@
-import { Share2, MoreHorizontal, Zap, ChartBar, MessageCircle, MessageSquare } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { useSelector } from "react-redux";
 
 export default function Navbar() {
-  const { conversations, selectedConversation } = useSelector(state => state.conversation);
+  const { selectedConversation } = useSelector(state => state.conversation);
   const {messages} = useSelector(state => state.message);
   return (
     <div className="h-14 flex items-center justify-between px-5 border-b border-white/[0.06] bg-[#0d0f14]">

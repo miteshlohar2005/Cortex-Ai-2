@@ -6,14 +6,15 @@ import dns from "node:dns";
 
 dotenv.config();
 
-// MongoDB DNS fix
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
+if (process.env.CUSTOM_DNS_SERVERS) {
+  dns.setServers(process.env.CUSTOM_DNS_SERVERS.split(","));
+}
 
 const app = express();
 
 app.use(express.json());
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8002;
 
 app.use("/", router);
 

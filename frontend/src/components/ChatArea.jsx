@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AIBanner from "./AiBanner";
 import ChatInput from "./ChatInput";
-import MessageBubble from "./MessageBubble";
 import MessageList from "./MessageList";
 import Navbar from "./Navbar";
 

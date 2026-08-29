@@ -5,15 +5,17 @@ import dotenv from "dotenv";
 import router from "./routes/auth.routes.js";
 import dns from "node:dns";
 
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
-
 dotenv.config();
+
+if (process.env.CUSTOM_DNS_SERVERS) {
+  dns.setServers(process.env.CUSTOM_DNS_SERVERS.split(","));
+}
 
 const app = express();
 
 app.use(express.json());
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8001;
 
 app.get("/", (req, res) => {
   res.status(200).json({

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Plus, MessageSquare, Settings, LogOut, User, PenSquare, Menu, X, Coins, ConeIcon, CoinsIcon } from "lucide-react";
+import { Plus, MessageSquare, LogOut, User, PenSquare, Menu, X, CoinsIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../utils/axios";
 import { setUserData } from "../redux/user.slice";
-import { createConversation, getConversations } from "../features/conversation.api";
-import { addConversation, setConversations, setSelectedConversation } from "../redux/conversation.slice";
+import { getConversations } from "../features/conversation.api";
+import { setConversations, setSelectedConversation } from "../redux/conversation.slice";
 import { getMessages } from "../features/message.api";
 import { setArtifacts, setMessages } from "../redux/message.slice";
   import BillingDrawer from "./BillingDrawer";

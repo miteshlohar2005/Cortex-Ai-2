@@ -1,7 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X, Crown, Zap } from "lucide-react";
-import { useState } from "react";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { createOrder } from "../features/billing.api";
 import api from "../utils/axios";

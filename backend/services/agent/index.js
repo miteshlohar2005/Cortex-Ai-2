@@ -5,15 +5,17 @@ import dns from "node:dns";
 import connectDB from "./config/db.js";
 import router from "./routes/agent.route.js";
 
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
-
 dotenv.config();
+
+if (process.env.CUSTOM_DNS_SERVERS) {
+  dns.setServers(process.env.CUSTOM_DNS_SERVERS.split(","));
+}
 
 const app = express();
 
 app.use(express.json());
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8003;
 
 app.use("/", router);
 
