@@ -18,8 +18,13 @@ async(req,res,next)=>{
 
 } = req.body;
 
-console.log(req.body)
-console.log(req.file)
+console.log("========== AGENT CHAT DEBUG ==========");
+console.log("REQ BODY:", req.body);
+console.log("PROMPT:", prompt);
+console.log("CONVERSATION ID:", conversationId);
+console.log("AGENT:", agent);
+console.log("FILE:", req.file);
+console.log("======================================");
 
 await addMessage(
  conversationId,
