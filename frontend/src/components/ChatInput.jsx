@@ -265,11 +265,11 @@ catch(error){
   };
 
   return (
-   <div className="w-full overflow-hidden px-3 md:px-5 py-4 border-t border-[#262626] bg-[#0A0A0A]">
-      <div className="flex flex-col gap-2 bg-[#111111] border border-[#404040] rounded-2xl px-4 pt-3.5 pb-3 transition-colors duration-200 focus-within:border-white">
+   <div className="w-full overflow-hidden px-3 md:px-5 pt-3 md:pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] border-t border-[#262626] bg-[#0A0A0A]">
+      <div className="flex flex-col gap-2 bg-[#111111] border border-[#404040] rounded-2xl px-4 pt-3.5 pb-3 transition-colors duration-200 focus-within:border-white overflow-hidden">
 
 
-    <div className="flex w-[80%] gap-2 pr-2 flex-wrap">
+    <div className="flex w-full gap-2 pr-2 overflow-x-auto flex-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [-webkit-overflow-scrolling:touch]">
 
     {agents.map((agent) => {
 
@@ -293,6 +293,7 @@ catch(error){
             text-xs
             font-medium
             border
+            whitespace-nowrap
             transition-all
 
             ${
@@ -329,7 +330,7 @@ selectedFile && (
 
 <div className="my-3">
 
-<div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2">
+<div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 max-w-full overflow-hidden">
 
 {
 
@@ -367,7 +368,7 @@ className="h-10 w-10 rounded-xl object-cover mt-3"
 
 <div>
 
-<p className="text-xs text-white">
+<p className="text-xs text-white truncate min-w-0 max-w-[55vw] sm:max-w-[200px]">
 
 {
 

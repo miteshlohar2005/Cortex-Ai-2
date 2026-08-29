@@ -102,7 +102,7 @@ export default function BillingDrawer({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: .25 }}
-            className="fixed right-0 top-0 z-50 h-screen w-[380px] bg-[#111111] border-l border-white/10 shadow-2xl flex flex-col"
+            className="fixed right-0 top-0 z-50 h-screen w-[calc(100vw-24px)] max-w-[380px] md:w-[380px] bg-[#111111] border-l border-white/10 shadow-2xl flex flex-col"
           >
 
             {/* Header */}
@@ -273,7 +273,7 @@ export default function BillingDrawer({
 
             {/* Footer */}
 
-            <div className="p-5 border-t border-white/10">
+            <div className="p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] border-t border-white/10">
 
               <p className="text-xs text-neutral-500">
 

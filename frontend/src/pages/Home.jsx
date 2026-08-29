@@ -28,14 +28,14 @@ const login=async (token)=>{
   };
 
   return (
-<div className="h-screen flex bg-[#0A0A0A] text-white overflow-hidden">
+<div className="app-shell flex bg-[#0A0A0A] text-white overflow-hidden">
       <Sidebar />
       <ChatArea />
       <ArtifactPanel />
 
       {!userData && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="w-[340px] bg-[#111111] border border-[#262626] rounded-2xl p-7 flex flex-col gap-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-5">
+          <div className="w-full max-w-[340px] bg-[#111111] border border-[#262626] rounded-2xl p-5 sm:p-7 flex flex-col gap-5">
 
             <div className="flex flex-col gap-1">
               <h2 className="text-[17px] font-semibold text-white tracking-tight">Welcome to CortexAI</h2>

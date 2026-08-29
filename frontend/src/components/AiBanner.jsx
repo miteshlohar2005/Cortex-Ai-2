@@ -52,7 +52,7 @@ export default function AIBanner({
             duration: .2
           }}
 
-          className="fixed top-5 left-1/2 -tranneutral-x-1/2 z-[999] w-[92%] max-w-xl"
+          className="fixed top-[max(1.25rem,env(safe-area-inset-top))] left-1/2 -translate-x-1/2 z-[999] w-[92%] max-w-xl"
 
         >
 

@@ -277,10 +277,13 @@ const [showBilling, setShowBilling] =useState(false);
       {/* ── Sidebar panel ── */}
       <div className={`
         fixed lg:static inset-y-0 left-0 z-50
-        w-[270px] h-screen shrink-0
+        w-[min(320px,85vw)] max-w-[320px] h-screen shrink-0
         bg-[#0A0A0A] border-r border-[#262626]
         transition-transform duration-250
-        ${mobileOpen ? "tranneutral-x-0" : "-tranneutral-x-full lg:tranneutral-x-0"}
+        ${mobileOpen
+          ? "translate-x-0 visible pointer-events-auto"
+          : "-translate-x-full invisible pointer-events-none lg:translate-x-0 lg:visible lg:pointer-events-auto"
+        }
       `}>
         <SidebarContent />
       </div>

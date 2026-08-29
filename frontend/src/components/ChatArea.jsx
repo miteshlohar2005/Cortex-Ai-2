@@ -12,7 +12,7 @@ function ChatArea() {
     message:""
 });
   return (
-    <div className="flex-1 flex flex-col min-w-0">
+    <div className="flex-1 w-full max-w-full flex flex-col min-w-0">
 
       <Navbar />
 

@@ -68,7 +68,7 @@ const markdown = (content || "")
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
       <div
-        className={`w-fit max-w-[92vw] md:max-w-[72%]
+        className={`w-fit max-w-[85vw] min-w-0 sm:max-w-[80%] md:max-w-[72%]
   px-4 py-2.5 rounded-2xl
   break-words overflow-hidden
   leading-relaxed

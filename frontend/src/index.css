@@ -24,6 +24,25 @@
     height: 100%;
   }
 
+  /* App shell: 100vh fallback → dynamic viewport on mobile
+     so the composer stays above the on-screen keyboard. */
+  .app-shell {
+    height: 100vh;
+  }
+
+  @media (max-width: 767px) {
+    .app-shell {
+      height: 100dvh;
+    }
+  }
+
+  /* Stop any stray element from creating page-level horizontal scroll */
+  html,
+  body {
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+  }
+
   body {
     margin: 0;
     background-color: #0A0A0A;

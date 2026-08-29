@@ -151,7 +151,7 @@ ${htmlFile?.content || ""}
     <>
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed bottom-24 right-4 z-40 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white hover:bg-neutral-200 text-black text-[12px] font-medium border border-white cursor-pointer transition-colors duration-150"
+        className="lg:hidden fixed bottom-[calc(6rem+env(safe-area-inset-bottom))] right-3 z-40 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white hover:bg-neutral-200 text-black text-[12px] font-medium border border-white cursor-pointer transition-colors duration-150"
       >
         <FiCode size={13} />
         View Code
